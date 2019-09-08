@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans> 
+
+    <!-- Abstracte Class for all Kinds of Polygons-->
+
+    <bean id="polygon" class = "de.franz.spring.Polygon" abstract="true" >
+
+    </bean>
+    
+    <bean id="triangle" class = "de.franz.spring.Triangle" parent="polygon">
+       <property name = "pointA" ref = "pointA" />
+       <property name = "pointB" ref = "pointB" />
+       <property name = "pointC" ref = "pointC" />
+    </bean>
+    
+    <bean id="square" class = "de.franz.spring.Square" parent="triangle">
+       <property name = "pointD" ref = "pointD" />
+    </bean>
+    
+    <bean id="circle" class = "de.franz.spring.Circle">
+       <property name = "center" ref = "pointA" />
+       <property name = "radius" value = "5" />
+    </bean>
+    
+    <!-- Points -->
+    
+    <bean id = "pointA" class = "de.franz.spring.Point">
+       <property name = "x" value = "${pointA.pointX}"/> 
+       <property name = "y" value = "${pointA.pointY}"/> 
+       <property name = "z" value = "${pointA.pointZ}"/> 
+    </bean> 
+    
+    <bean id = "pointB" class = "de.franz.spring.Point">
+        <property name = "x" value = "${pointB.pointX}"/>  
+        <property name = "y" value = "${pointB.pointY}"/>   
+        <property name = "z" value = "${pointB.pointZ}"/> 
+    </bean>
+    
+    <bean id = "pointC" class = "de.franz.spring.Point">
+        <property name = "x" value = "${pointC.pointX}"/> 
+        <property name = "y" value = "${pointC.pointY}"/> 
+        <property name = "z" value = "${pointC.pointZ}"/>   
+    </bean>
+    
+    <bean id = "pointD" class = "de.franz.spring.Point">
+        <property name = "x" value = "${pointD.pointX}"/> 
+        <property name = "y" value = "${pointD.pointY}"/>
+        <property name = "z" value = "${pointD.pointZ}"/>    
+    </bean>
+    
+    <!-- Configuration -->
+    
+    <bean class = "org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" >
+       <property name = "locations" value = "pointconfig.properties"/> 
+    </bean>
+
+    <bean class = "org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor" >
+    </bean>
+
+
+</beans>
